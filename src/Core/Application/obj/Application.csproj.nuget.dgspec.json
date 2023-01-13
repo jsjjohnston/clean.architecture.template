@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\clean.architecture.template\\src\\core\\Application\\Application.csproj": {}
+    "C:\\Projects\\clean.architecture.template\\src\\Core\\Application\\Application.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\clean.architecture.template\\src\\core\\Application\\Application.csproj": {
+    "C:\\Projects\\clean.architecture.template\\src\\Core\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\clean.architecture.template\\src\\core\\Application\\Application.csproj",
+        "projectUniqueName": "C:\\Projects\\clean.architecture.template\\src\\Core\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\Projects\\clean.architecture.template\\src\\core\\Application\\Application.csproj",
+        "projectPath": "C:\\Projects\\clean.architecture.template\\src\\Core\\Application\\Application.csproj",
         "packagesPath": "C:\\Users\\jay\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\clean.architecture.template\\src\\core\\Application\\obj\\",
+        "outputPath": "C:\\Projects\\clean.architecture.template\\src\\Core\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jay\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,16 +39,6 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "dependencies": {
-            "Microsoft.AspNetCore.OpenApi": {
-              "target": "Package",
-              "version": "[7.0.2, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[6.4.0, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
@@ -61,9 +51,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
