@@ -383,7 +383,7 @@ FodyWeavers.xsd
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
-.vs/*
+.vs/
 
 # Local History for Visual Studio Code
 .history/
@@ -398,3 +398,10 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+/.vs/clean.architecture.template/FileContentIndex/591b37c3-252f-449d-bcb4-ffe70ae8c20f.vsidx
+/.vs/clean.architecture.template/FileContentIndex/ace723b6-508d-4ab1-8930-3f563fd0ee6f.vsidx
+/.vs/clean.architecture.template/DesignTimeBuild/.dtbcache.v2
+/.vs/clean.architecture.template/v17/.futdcache.v2
+/.vs/clean.architecture.template/v17/.suo
+/.vs/ProjectEvaluation/clean.architecture.template.metadata.v5.2
+/.vs/ProjectEvaluation/clean.architecture.template.projects.v5.2
