@@ -107,6 +107,29 @@ namespace Architecture.Tests
         }
 
         [TestMethod]
+        [Description("In clean Clean Architecture the presentation layer should not have any dependencies on The Presentation or Web Projects")]
+        public void Persistence_Should_Not_HaveDependencyOnOtherProjects()
+        {
+            // Arrange
+            var assembly = typeof(Persistence.AssemblyReference).Assembly;
+
+            var otherProjects = new[]
+            {
+                DomainNamespace
+            };
+
+            // Act
+            var testResult = Types
+                .InAssembly(assembly)
+                .ShouldNot()
+                .HaveDependencyOnAll(otherProjects)
+                .GetResult();
+
+            // Assert
+            testResult.IsSuccessful.Should().BeTrue();
+        }
+
+        [TestMethod]
         [Description("In clean Clean Architecture the presentation layer should not have any dependencies on The Infustruture or Web Projects")]
         public void Presentation_Should_Not_HaveDependencyOnOtherProjects()
         {
