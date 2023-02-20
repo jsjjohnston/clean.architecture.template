@@ -4,7 +4,7 @@ using NetArchTest.Rules;
 namespace Architecture.Tests
 {
     [TestClass]
-    public class ArchitectureTests
+    public class CleanArchitectureTests
     {
         private const string DomainNamespace = "Domain";
         private const string ApplicationNamespace = "Application";
