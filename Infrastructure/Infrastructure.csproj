@@ -12,4 +12,13 @@
     <Folder Include="Repositories\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Quartz" Version="3.6.0" />
+    <PackageReference Include="Quartz.Extensions.Hosting" Version="3.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Persistence\Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

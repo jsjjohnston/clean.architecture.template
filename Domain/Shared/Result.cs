@@ -25,6 +25,8 @@ public class Result
     public static Result<TValue> Success<TValue>(TValue value) => new(value, true, Error.None);
     public static Result Falure(Error error) => new(true, error);
     public static Result<TValue> Falure<TValue>(TValue value, Error error) => new(value, true, error);
+
+    protected static Result<TValue> Create<TValue>(TValue value) => new(value, false, Error.None);
 }
 
 
