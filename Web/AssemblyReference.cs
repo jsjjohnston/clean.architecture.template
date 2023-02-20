@@ -1,4 +1,4 @@
-﻿namespace Application
+﻿namespace Presentation
 {
     public class AssemblyReference
     {

@@ -1,4 +1,4 @@
-﻿namespace Application
+﻿namespace Web
 {
     public class AssemblyReference
     {

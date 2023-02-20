@@ -1,4 +1,4 @@
-﻿namespace Application
+﻿namespace Infrastructure
 {
     public class AssemblyReference
     {
