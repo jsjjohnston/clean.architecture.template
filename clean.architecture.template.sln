@@ -9,13 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{84AA9F94-A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\Core\Domain\Domain.csproj", "{FA80D8F6-708B-4539-B840-273D86B64D4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "src\core\Application\Application.csproj", "{5EA1CDB5-F886-4B15-824F-BB21A6CD9B29}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\core\Application\Application.csproj", "{5EA1CDB5-F886-4B15-824F-BB21A6CD9B29}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{27307D15-7440-4E40-ABC8-9BB1C4EDD620}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\External\Infrastructure\Infrastructure.csproj", "{997F8D18-5E28-4403-9B79-5937CDB1AAB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "src\External\Infrastructure\Infrastructure.csproj", "{997F8D18-5E28-4403-9B79-5937CDB1AAB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "src\External\Presentation\Presentation.csproj", "{50C52859-F30D-4FAA-A135-CDB029452240}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "src\External\Presentation\Presentation.csproj", "{50C52859-F30D-4FAA-A135-CDB029452240}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
