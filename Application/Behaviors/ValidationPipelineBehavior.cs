@@ -1,8 +1,6 @@
 ﻿using Domain.Shared;
 using FluentValidation;
-using FluentValidation.Results;
 using MediatR;
-using System.ComponentModel.DataAnnotations;
 
 namespace Application.Behaviors;
 

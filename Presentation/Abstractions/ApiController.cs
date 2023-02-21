@@ -19,7 +19,7 @@ public abstract class ApiController : ControllerBase
         result switch
         {
             { IsSuccess: true } => throw new InvalidOperationException(),
-            IValidationResult validationResult => 
+            IValidationResult validationResult =>
             BadRequest(
                 CreateProblemDetails(
                     "Validation Error",
@@ -38,7 +38,7 @@ public abstract class ApiController : ControllerBase
 
     private static ProblemDetails CreateProblemDetails(
         string title,
-        int status, 
+        int status,
         Error error,
         Error[]? errors = null) =>
         new()
@@ -47,6 +47,6 @@ public abstract class ApiController : ControllerBase
             Type = error.Code,
             Status = status,
             Detail= error.Message,
-            Extensions = { { nameof(errors), errors} }
+            Extensions = { { nameof(errors), errors } }
         };
 }

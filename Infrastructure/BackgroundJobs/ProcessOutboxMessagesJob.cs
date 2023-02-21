@@ -47,9 +47,9 @@ public class ProcessOutboxMessagesJob : IJob
                 3,
                 attempt => TimeSpan.FromMilliseconds(50 * attempt));
 
-            var result = await policy.ExecuteAndCaptureAsync(() => 
+            var result = await policy.ExecuteAndCaptureAsync(() =>
                 _publisher.Publish(
-                    domainEvent, 
+                    domainEvent,
                     context.CancellationToken));
 
             outboxMessage.Error = result.FinalException?.ToString();
