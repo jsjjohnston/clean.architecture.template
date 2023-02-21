@@ -1,5 +1,5 @@
 ﻿namespace Domain.Primitives;
-public abstract class Entity: IEquatable<Entity>
+public abstract class Entity : IEquatable<Entity>
 {
     protected Entity(Guid id) => Id = id;
 
@@ -42,7 +42,7 @@ public abstract class Entity: IEquatable<Entity>
             return false;
         }
 
-        if (other.GetType() != GetType()) 
+        if (other.GetType() != GetType())
         {
             return false;
         }

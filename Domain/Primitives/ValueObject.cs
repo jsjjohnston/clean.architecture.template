@@ -18,7 +18,7 @@ public abstract class ValueObject : IEquatable<ValueObject>
     {
         return GetAtomicValues()
             .Aggregate(
-                default(int), 
+                default(int),
                 HashCode.Combine);
     }
 

@@ -13,7 +13,7 @@ public class ProcessOutboxMessagesJob : IJob
 {
     private readonly ApplicationDbContext _dbContext;
     private readonly IPublisher _publisher;
-    
+
     public ProcessOutboxMessagesJob(ApplicationDbContext dbContext, IPublisher publisher)
     {
         _dbContext=dbContext;
@@ -24,8 +24,8 @@ public class ProcessOutboxMessagesJob : IJob
     {
         List<OutboxMessage> messages = await _dbContext.Set<OutboxMessage>()
             .Where(m => m.ProcessedOnUtc == null)
-                // TODO: Add Configuration for outbox message Jobs Take
-            .Take(20) 
+            // TODO: Add Configuration for outbox message Jobs Take
+            .Take(20)
             .ToListAsync(context.CancellationToken);
 
         foreach (var outboxMessage in messages)

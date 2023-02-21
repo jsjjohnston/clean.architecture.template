@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Newtonsoft.Json;
 using Persistence.Outbox;
-using System.Text.Json;
 
 namespace Persistence.Interceptors;
 

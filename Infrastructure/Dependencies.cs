@@ -26,7 +26,7 @@ namespace Infrastructure
             });
 
             services.AddQuartzHostedService();
-            
+
             return services;
         }
     }
