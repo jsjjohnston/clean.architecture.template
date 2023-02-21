@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Persistence;
 using Persistence.Outbox;
+using Polly;
 using Quartz;
 
 namespace Infrastructure.BackgroundJobs;
@@ -39,8 +40,19 @@ public class ProcessOutboxMessagesJob : IJob
                 continue;
             }
 
-            await _publisher.Publish(domainEvent, context.CancellationToken);
+            // TODO: Add configuration for retry cound and sleep Duration
+            var policy = Policy
+                .Handle<Exception>()
+                .WaitAndRetryAsync(
+                3,
+                attempt => TimeSpan.FromMilliseconds(50 * attempt));
 
+            var result = await policy.ExecuteAndCaptureAsync(() => 
+                _publisher.Publish(
+                    domainEvent, 
+                    context.CancellationToken));
+
+            outboxMessage.Error = result.FinalException?.ToString();
             outboxMessage.ProcessedOnUtc = DateTime.UtcNow;
         }
 
