@@ -1,4 +1,6 @@
-﻿namespace Domain.Primitives
+﻿using Domain.Abstractions;
+
+namespace Domain.Primitives
 {
     public abstract class AggregateRoot : Entity
     {

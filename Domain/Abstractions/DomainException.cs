@@ -1,4 +1,4 @@
-﻿namespace Domain.Primitives;
+﻿namespace Domain.Abstractions;
 
 public abstract class DomainException : Exception
 {

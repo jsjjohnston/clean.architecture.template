@@ -1,4 +1,5 @@
-﻿using Domain.Primitives;
+﻿using Domain.Abstractions;
+using Domain.Primitives;
 using FluentAssertions;
 using NetArchTest.Rules;
 

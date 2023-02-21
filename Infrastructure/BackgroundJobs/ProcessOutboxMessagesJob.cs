@@ -1,4 +1,4 @@
-﻿using Domain.Primitives;
+﻿using Domain.Abstractions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;

@@ -6,6 +6,7 @@ namespace Architecture.Tests
     [TestClass]
     public class CleanArchitectureTests
     {
+        // TODO: review Correct Layer Dependency In Clean Architecture
         private const string DomainNamespace = "Domain";
         private const string ApplicationNamespace = "Application";
         private const string InfrastructureNamespace = "Infrastructure";
@@ -115,7 +116,7 @@ namespace Architecture.Tests
 
             var otherProjects = new[]
             {
-                DomainNamespace
+                WebNamespace
             };
 
             // Act
