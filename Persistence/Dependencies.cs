@@ -13,14 +13,9 @@ public static class Dependencies
 
         services.AddSingleton<ConvertDomainEventsToOutboxMessagesInterceptor>();
 
-        services.AddDbContext<ApplicationDbContext>((sp, optionsBuilder) =>
-        {
+        services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseInMemoryDatabase("CleanArchitectureDb"));
 
-            var intercepter = sp.GetRequiredService<ConvertDomainEventsToOutboxMessagesInterceptor>();
-
-            optionsBuilder.UseSqlServer(connectionString)
-                          .AddInterceptors(intercepter);
-        });
         return services;
     }
 }
