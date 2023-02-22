@@ -20,7 +20,7 @@ public sealed class IdempotentDomainEventHandler<TDomainEvent> : IDomainEventHan
 
     public async Task Handle(TDomainEvent notification, CancellationToken cancellationToken)
     {
-        string consumer = _decorated.GetType().Name;
+        var consumer = _decorated.GetType().Name;
 
         if (await _dbContext.Set<OutboxMessageConsumer>()
             .AnyAsync(

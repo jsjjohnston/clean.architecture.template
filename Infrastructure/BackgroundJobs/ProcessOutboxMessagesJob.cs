@@ -23,7 +23,7 @@ public class ProcessOutboxMessagesJob : IJob
 
     public async Task Execute(IJobExecutionContext context)
     {
-        List<OutboxMessage> messages = await _dbContext.Set<OutboxMessage>()
+        var messages = await _dbContext.Set<OutboxMessage>()
             .Where(m => m.ProcessedOnUtc == null)
             // TODO: Add Configuration for outbox message Jobs Take
             .Take(20)
@@ -31,7 +31,7 @@ public class ProcessOutboxMessagesJob : IJob
 
         foreach (var outboxMessage in messages)
         {
-            IDomainEvent? domainEvent = JsonConvert
+            var domainEvent = JsonConvert
                 .DeserializeObject<IDomainEvent>(outboxMessage.Content);
 
             if (domainEvent is null)

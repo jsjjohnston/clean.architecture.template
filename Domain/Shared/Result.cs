@@ -35,7 +35,7 @@ public class Result
 
     public static Result FirstFailureOrSuccess(params Result[] results)
     {
-        foreach (Result result in results)
+        foreach (var result in results)
         {
             if (result.IsFailure)
             {
@@ -46,7 +46,4 @@ public class Result
         return Success();
     }
 }
-
-
-
 

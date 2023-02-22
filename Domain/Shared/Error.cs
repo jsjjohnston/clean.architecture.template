@@ -15,53 +15,14 @@ public class Error : IEquatable<Error>
 
     public static implicit operator string(Error error) => error.Code;
 
-    public static bool operator ==(Error? first, Error? second)
-    {
-        if (first is null && second is null)
-        {
-            return true;
-        }
+    public static bool operator ==(Error? first, Error? second) => (first is null && second is null) || 
+                                                                   (first is not null && second is not null && first.Code == second.Code);
 
-        if (first is null || second is null)
-        {
-            return false;
-        }
+    public static bool operator !=(Error? first, Error? second) => !(first == second);
 
-        return first.Code == second.Code;
-    }
+    public bool Equals(Error? other) => other is not null && other.Code == Code;
 
-    public static bool operator !=(Error? first, Error? second)
-    {
-        return !(first == second);
-    }
+    public override bool Equals(object? obj) => obj is not null &&obj is Error error &&error.Code == Code;
 
-    public bool Equals(Error? other)
-    {
-        if (other is null)
-        {
-            return false;
-        }
-
-        return other.Code == Code;
-    }
-
-    public override bool Equals(object? obj)
-    {
-        if (obj is null)
-        {
-            return false;
-        }
-
-        if (obj is not Error error)
-        {
-            return false;
-        }
-
-        return error.Code == Code;
-    }
-
-    public override int GetHashCode()
-    {
-        return Code.GetHashCode();
-    }
+    public override int GetHashCode() => Code.GetHashCode();
 }

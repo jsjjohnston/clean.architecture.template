@@ -1,5 +1,4 @@
 ﻿using Domain.Primitives;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Newtonsoft.Json;
 using Persistence.Outbox;
@@ -10,7 +9,7 @@ public sealed class ConvertDomainEventsToOutboxMessagesInterceptor : SaveChanges
 {
     public override ValueTask<int> SavedChangesAsync(SaveChangesCompletedEventData eventData, int result, CancellationToken cancellationToken = default)
     {
-        DbContext? dbContext = eventData.Context;
+        var dbContext = eventData.Context;
 
         if (dbContext is null)
         {
