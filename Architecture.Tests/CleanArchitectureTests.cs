@@ -1,178 +1,176 @@
 using FluentAssertions;
 using NetArchTest.Rules;
 
-namespace Architecture.Tests
+namespace Architecture.Tests;
+
+[TestClass]
+public class CleanArchitectureTests
 {
-    [TestClass]
-    public class CleanArchitectureTests
+    // TODO: review Correct Layer Dependency In Clean Architecture
+    private const string DomainNamespace = "Domain";
+    private const string ApplicationNamespace = "Application";
+    private const string InfrastructureNamespace = "Infrastructure";
+    private const string PresentationNamespace = "Presentation";
+    private const string WebNamespace = "Web";
+
+    [TestMethod]
+    [Description("In clean Clean Architecture the presentation layer should not have any dependencies on The Application, Presentation, Infrastructure or Web Projects")]
+    public void Domain_Should_Not_HaveDependencyOnOtherProjects()
     {
-        // TODO: review Correct Layer Dependency In Clean Architecture
-        private const string DomainNamespace = "Domain";
-        private const string ApplicationNamespace = "Application";
-        private const string InfrastructureNamespace = "Infrastructure";
-        private const string PresentationNamespace = "Presentation";
-        private const string WebNamespace = "Web";
+        // Arrange
+        var assembly = typeof(Domain.AssemblyReference).Assembly;
 
-        [TestMethod]
-        [Description("In clean Clean Architecture the presentation layer should not have any dependencies on The Application, Presentation, Infrastructure or Web Projects")]
-        public void Domain_Should_Not_HaveDependencyOnOtherProjects()
+        var otherProjects = new[]
         {
-            // Arrange
-            var assembly = typeof(Domain.AssemblyReference).Assembly;
+            ApplicationNamespace,
+            InfrastructureNamespace,
+            PresentationNamespace,
+            WebNamespace,
+        };
 
-            var otherProjects = new[]
-            {
-                ApplicationNamespace,
-                InfrastructureNamespace,
-                PresentationNamespace,
-                WebNamespace,
-            };
+        // Act
+        var testResult = Types
+            .InAssembly(assembly)
+            .ShouldNot()
+            .HaveDependencyOnAll(otherProjects)
+            .GetResult();
 
-            // Act
-            var testResult = Types
-                .InAssembly(assembly)
-                .ShouldNot()
-                .HaveDependencyOnAll(otherProjects)
-                .GetResult();
+        // Assert
+        testResult.IsSuccessful.Should().BeTrue();
+    }
 
-            // Assert
-            testResult.IsSuccessful.Should().BeTrue();
-        }
+    [TestMethod]
+    [Description("In clean Clean Architecture the presentation layer should not have any dependencies on The Presentation, Infrastructure or Web Projects")]
+    public void Application_Should_Not_HaveDependencyOnOtherProjects()
+    {
+        // Arrange
+        var assembly = typeof(Application.AssemblyReference).Assembly;
 
-        [TestMethod]
-        [Description("In clean Clean Architecture the presentation layer should not have any dependencies on The Presentation, Infrastructure or Web Projects")]
-        public void Application_Should_Not_HaveDependencyOnOtherProjects()
+        var otherProjects = new[]
         {
-            // Arrange
-            var assembly = typeof(Application.AssemblyReference).Assembly;
+            InfrastructureNamespace,
+            PresentationNamespace,
+            WebNamespace,
+        };
 
-            var otherProjects = new[]
-            {
-                InfrastructureNamespace,
-                PresentationNamespace,
-                WebNamespace,
-            };
+        // Act
+        var testResult = Types
+            .InAssembly(assembly)
+            .ShouldNot()
+            .HaveDependencyOnAll(otherProjects)
+            .GetResult();
 
-            // Act
-            var testResult = Types
-                .InAssembly(assembly)
-                .ShouldNot()
-                .HaveDependencyOnAll(otherProjects)
-                .GetResult();
+        // Assert
+        testResult.IsSuccessful.Should().BeTrue();
+    }
 
-            // Assert
-            testResult.IsSuccessful.Should().BeTrue();
-        }
+    [TestMethod]
+    public void Handlers_Should_Have_DependencyOnDomain()
+    {
+        // Arrange
+        var assembly = typeof(Application.AssemblyReference).Assembly;
 
-        [TestMethod]
-        public void Handlers_Should_Have_DependencyOnDomain()
+        // Act
+        var testResult = Types
+            .InAssembly(assembly)
+            .That()
+            .HaveNameEndingWith("Handler")
+            .Should()
+            .HaveDependencyOn(DomainNamespace)
+            .GetResult();
+
+        // Assert
+        testResult.IsSuccessful.Should().BeTrue();
+    }
+
+    [TestMethod]
+    [Description("In clean Clean Architecture the presentation layer should not have any dependencies on The Presentation or Web Projects")]
+    public void Infrastructure_Should_Not_HaveDependencyOnOtherProjects()
+    {
+        // Arrange
+        var assembly = typeof(Infrastructure.AssemblyReference).Assembly;
+
+        var otherProjects = new[]
         {
-            // Arrange
-            var assembly = typeof(Application.AssemblyReference).Assembly;
+            PresentationNamespace,
+            WebNamespace,
+        };
 
-            // Act
-            var testResult = Types
-                .InAssembly(assembly)
-                .That()
-                .HaveNameEndingWith("Handler")
-                .Should()
-                .HaveDependencyOn(DomainNamespace)
-                .GetResult();
+        // Act
+        var testResult = Types
+            .InAssembly(assembly)
+            .ShouldNot()
+            .HaveDependencyOnAll(otherProjects)
+            .GetResult();
 
-            // Assert
-            testResult.IsSuccessful.Should().BeTrue();
-        }
+        // Assert
+        testResult.IsSuccessful.Should().BeTrue();
+    }
 
-        [TestMethod]
-        [Description("In clean Clean Architecture the presentation layer should not have any dependencies on The Presentation or Web Projects")]
-        public void Infrastructure_Should_Not_HaveDependencyOnOtherProjects()
+    [TestMethod]
+    [Description("In clean Clean Architecture the presentation layer should not have any dependencies on The Presentation or Web Projects")]
+    public void Persistence_Should_Not_HaveDependencyOnOtherProjects()
+    {
+        // Arrange
+        var assembly = typeof(Persistence.AssemblyReference).Assembly;
+
+        var otherProjects = new[]
         {
-            // Arrange
-            var assembly = typeof(Infrastructure.AssemblyReference).Assembly;
+            WebNamespace
+        };
 
-            var otherProjects = new[]
-            {
-                PresentationNamespace,
-                WebNamespace,
-            };
+        // Act
+        var testResult = Types
+            .InAssembly(assembly)
+            .ShouldNot()
+            .HaveDependencyOnAll(otherProjects)
+            .GetResult();
 
-            // Act
-            var testResult = Types
-                .InAssembly(assembly)
-                .ShouldNot()
-                .HaveDependencyOnAll(otherProjects)
-                .GetResult();
+        // Assert
+        testResult.IsSuccessful.Should().BeTrue();
+    }
 
-            // Assert
-            testResult.IsSuccessful.Should().BeTrue();
-        }
+    [TestMethod]
+    [Description("In clean Clean Architecture the presentation layer should not have any dependencies on The Infustruture or Web Projects")]
+    public void Presentation_Should_Not_HaveDependencyOnOtherProjects()
+    {
+        // Arrange
+        var assembly = typeof(Presentation.AssemblyReference).Assembly;
 
-        [TestMethod]
-        [Description("In clean Clean Architecture the presentation layer should not have any dependencies on The Presentation or Web Projects")]
-        public void Persistence_Should_Not_HaveDependencyOnOtherProjects()
+        var otherProjects = new[]
         {
-            // Arrange
-            var assembly = typeof(Persistence.AssemblyReference).Assembly;
+            InfrastructureNamespace,
+            WebNamespace,
+        };
 
-            var otherProjects = new[]
-            {
-                WebNamespace
-            };
+        // Act
+        var testResult = Types
+            .InAssembly(assembly)
+            .ShouldNot()
+            .HaveDependencyOnAll(otherProjects)
+            .GetResult();
 
-            // Act
-            var testResult = Types
-                .InAssembly(assembly)
-                .ShouldNot()
-                .HaveDependencyOnAll(otherProjects)
-                .GetResult();
+        // Assert
+        testResult.IsSuccessful.Should().BeTrue();
+    }
 
-            // Assert
-            testResult.IsSuccessful.Should().BeTrue();
-        }
+    [TestMethod]
+    [Description("In clean Clean Architecture the presentation layer should not have any dependencies on The Infustruture or Web Projects")]
+    public void Controllers_Should_HaveDependencyOnMediatR()
+    {
+        // Arrange
+        var assembly = typeof(Presentation.AssemblyReference).Assembly;
 
-        [TestMethod]
-        [Description("In clean Clean Architecture the presentation layer should not have any dependencies on The Infustruture or Web Projects")]
-        public void Presentation_Should_Not_HaveDependencyOnOtherProjects()
-        {
-            // Arrange
-            var assembly = typeof(Presentation.AssemblyReference).Assembly;
+        // Act
+        var testResult = Types
+            .InAssembly(assembly)
+            .That()
+            .HaveNameEndingWith("Controller")
+            .Should()
+            .HaveDependencyOn("MediatR")
+            .GetResult();
 
-            var otherProjects = new[]
-            {
-                InfrastructureNamespace,
-                WebNamespace,
-            };
-
-            // Act
-            var testResult = Types
-                .InAssembly(assembly)
-                .ShouldNot()
-                .HaveDependencyOnAll(otherProjects)
-                .GetResult();
-
-            // Assert
-            testResult.IsSuccessful.Should().BeTrue();
-        }
-
-        [TestMethod]
-        [Description("In clean Clean Architecture the presentation layer should not have any dependencies on The Infustruture or Web Projects")]
-        public void Controllers_Should_HaveDependencyOnMediatR()
-        {
-            // Arrange
-            var assembly = typeof(Presentation.AssemblyReference).Assembly;
-
-
-            // Act
-            var testResult = Types
-                .InAssembly(assembly)
-                .That()
-                .HaveNameEndingWith("Controller")
-                .Should()
-                .HaveDependencyOn("MediatR")
-                .GetResult();
-
-            // Assert
-            testResult.IsSuccessful.Should().BeTrue();
-        }
+        // Assert
+        testResult.IsSuccessful.Should().BeTrue();
     }
 }

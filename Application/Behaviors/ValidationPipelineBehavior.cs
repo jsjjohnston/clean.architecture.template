@@ -11,10 +11,7 @@ public class ValidationPipelineBehavior<TRequest, TResponse>
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 
-    public ValidationPipelineBehavior(IEnumerable<IValidator<TRequest>> validators)
-    {
-        _validators=validators;
-    }
+    public ValidationPipelineBehavior(IEnumerable<IValidator<TRequest>> validators) => _validators=validators;
 
     public async Task<TResponse> Handle(
         TRequest request,
@@ -36,12 +33,7 @@ public class ValidationPipelineBehavior<TRequest, TResponse>
             .Distinct()
             .ToArray();
 
-        if (errors.Any())
-        {
-            return CreateValidationResult<TResponse>(errors);
-        }
-
-        return await next();
+        return errors.Any() ? CreateValidationResult<TResponse>(errors) : await next();
     }
 
     private TResult CreateValidationResult<TResult>(Error[] errors)

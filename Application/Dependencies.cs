@@ -1,26 +1,17 @@
-﻿using Application.Behaviors;
-using FluentValidation;
-using Infrastructure.Idempotence;
-using MediatR;
-using Microsoft.Extensions.Configuration;
+﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Application
+namespace Application;
+
+public static class Dependencies
 {
-    public static class Dependencies
+    public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(AssemblyReference.Assembly));
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(AssemblyReference.Assembly));
 
-            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
+        services.AddValidatorsFromAssembly(Application.AssemblyReference.Assembly,
+            includeInternalTypes: true);
 
-            services.Decorate(typeof(INotificationHandler<>), typeof(IdempotentDomainEventHandler<>));
-
-            services.AddValidatorsFromAssembly(Application.AssemblyReference.Assembly,
-                includeInternalTypes: true);
-
-            return services;
-        }
+        return services;
     }
 }
